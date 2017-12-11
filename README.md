@@ -5,3 +5,5 @@ by student Nikita Gressky
 - Lab 3: binary and interpolation search recursion depth
 - Lab 4: binary tree
 - Lab 5: hash table
+- Lab 6: Kruskal MST
+- Lab 7: Matches
