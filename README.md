@@ -6,4 +6,5 @@ by student Nikita Gressky
 - Lab 4: binary tree
 - Lab 5: hash table
 - Lab 6: Kruskal MST
-- Lab 7: Matches
+- Lab 7: Stable marriage problem
+- Lab 8: Prim MST
