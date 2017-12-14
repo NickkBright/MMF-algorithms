@@ -1,7 +1,6 @@
 package com.nickkbright.prim;
 
-public class Edge implements Comparable<Edge>
-{
+public class Edge {
     public Vertex start;
     public Vertex end;
     public int weight;
@@ -12,17 +11,4 @@ public class Edge implements Comparable<Edge>
         this.weight = weight;
     }
 
-    @Override
-    public int compareTo(Edge edge) {
-        return this.weight - edge.weight;
-    }
-
-    @Override
-    public String toString() {
-        return "Edge{" +
-                "start=" + start +
-                ", end=" + end +
-                ", weight=" + weight +
-                '}';
-    }
 }

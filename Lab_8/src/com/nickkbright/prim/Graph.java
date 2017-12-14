@@ -23,14 +23,6 @@ public class Graph {
         }
     }
 
-
-    public Edge compareEdges (Edge fromStart, Edge fromEnd) {
-        if (fromStart.weight > fromEnd.weight)
-            return fromEnd;
-        else
-            return fromStart;
-    }
-
     public void showVertex(int vertex) {
         System.out.println(vertexList[vertex].label);
     }
