@@ -34,15 +34,6 @@ public class Graph {
             System.out.println(sortedEdgeList.get(i) + ", ");
         }
     }
-//    int mstKruskal(Edge[] edges) {
-//        DSF dsf = new DSF(vNum); // СНМ
-//        sortEdges(); // Сортируем ребра
-//        int ret = 0; // результат
-//        for (int i = 0; i < sortedEdgeList.size(); i++) // перебираем ребра в порядке возрастания
-//            if (dsf.Unite(edges., e.v)) // если ребра принадлежат разным компонентам
-//                ret += e.w; // добавляем вес ребра к стоимости MST
-//        return ret;
-//    }
 
     public void addVertex (char lab) {
         vertexList[vertexCount++] = new Vertex(lab);
@@ -86,6 +77,7 @@ public class Graph {
 
     public void findKruskalMST () {
         int setCounter = 1;
+        int minWeight = 0;
         ArrayList<Edge> MSTree = new ArrayList<>();
         for (int i = 0; i < sortedEdgeList.size(); i++) {
             if ((!sortedEdgeList.get(i).start.wasVisited) && (!sortedEdgeList.get(i).end.wasVisited)) {
@@ -94,6 +86,7 @@ public class Graph {
                 sortedEdgeList.get(i).start.set = setCounter;
                 sortedEdgeList.get(i).end.set = setCounter;
                 MSTree.add(sortedEdgeList.get(i));
+                minWeight += sortedEdgeList.get(i).weight;
                 setCounter++;
             }
             if ((!sortedEdgeList.get(i).start.wasVisited) || (!sortedEdgeList.get(i).end.wasVisited)) {
@@ -104,16 +97,19 @@ public class Graph {
                 sortedEdgeList.get(i).start.wasVisited = true;
                 sortedEdgeList.get(i).end.wasVisited = true;
                 MSTree.add(sortedEdgeList.get(i));
+                minWeight += sortedEdgeList.get(i).weight;
             }
             if ((sortedEdgeList.get(i).start.wasVisited) && (sortedEdgeList.get(i).end.wasVisited)) {
                 if (sortedEdgeList.get(i).start.set != sortedEdgeList.get(i).end.set) {
                     for (int j = 0; j < sortedEdgeList.size(); j++) {
-                        if ((sortedEdgeList.get(i).start.set > sortedEdgeList.get(i).end.set)&&(sortedEdgeList.get(i).end.set > 0))
-                            sortedEdgeList.get(i).start.set = sortedEdgeList.get(i).end.set;
-                        if ((sortedEdgeList.get(i).start.set < sortedEdgeList.get(i).end.set)&&(sortedEdgeList.get(i).start.set > 0))
-                            sortedEdgeList.get(i).end.set = sortedEdgeList.get(i).start.set;
+                        if ((sortedEdgeList.get(j).start.set > sortedEdgeList.get(j).end.set)&&(sortedEdgeList.get(j).end.set > 0))
+                            sortedEdgeList.get(j).end.set = sortedEdgeList.get(j).start.set;
+                        if ((sortedEdgeList.get(j).start.set < sortedEdgeList.get(j).end.set)&&(sortedEdgeList.get(j).start.set > 0))
+                            sortedEdgeList.get(j).start.set = sortedEdgeList.get(j).end.set;
                     }
+
                     MSTree.add(sortedEdgeList.get(i));
+                    minWeight += sortedEdgeList.get(i).weight;
                 }
 
             }
@@ -121,6 +117,7 @@ public class Graph {
         for (int i = 0; i < MSTree.size(); i++) {
             System.out.println(MSTree.get(i) + ", ");
         }
+        System.out.println("Weight = " + minWeight);
 
     }
 
