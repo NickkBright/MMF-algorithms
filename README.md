@@ -8,3 +8,4 @@ by student Nikita Gressky
 - Lab 6: Kruskal MST
 - Lab 7: Stable marriage problem
 - Lab 8: Prim MST
+- Lab 9: Dijkstra algorithm
