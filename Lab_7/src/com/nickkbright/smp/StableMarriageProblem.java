@@ -1,6 +1,6 @@
-package com.nickkbright.matches;
+package com.nickkbright.smp;
 
-public class Matches {
+public class StableMarriageProblem {
 
     private int N, engagedCount;
     private String[][] menPref;
@@ -10,7 +10,7 @@ public class Matches {
     private String[] womenPartner;
     private boolean[] menEngaged;
 
-    public Matches(String[] m, String[] w, String[][] mp, String[][] wp) {
+    public StableMarriageProblem(String[] m, String[] w, String[][] mp, String[][] wp) {
         N = mp.length;
         engagedCount = 0;
         men = m;
@@ -19,11 +19,9 @@ public class Matches {
         womenPref = wp;
         menEngaged = new boolean[N];
         womenPartner = new String[N];
-        calcMatches();
     }
 
-    // function to calculate all matches
-    private void calcMatches() {
+    public void calcMatches() {
         while (engagedCount < N) {
             int free;
             for (free = 0; free < N; free++) {
@@ -33,7 +31,7 @@ public class Matches {
             }
 
             for (int i = 0; i < N && !menEngaged[free]; i++) {
-                int index = womenIndexOf(menPref[free][i]);
+                int index = getWomenIndex(menPref[free][i]);
                 if (womenPartner[index] == null) {
                     womenPartner[index] = men[free];
                     menEngaged[free] = true;
@@ -41,18 +39,17 @@ public class Matches {
                 }
                 else {
                     String currentPartner = womenPartner[index];
-                    if (morePreference(currentPartner, men[free], index)) {
+                    if (anotherPreference(currentPartner, men[free], index)) {
                         womenPartner[index] = men[free];
                         menEngaged[free] = true;
-                        menEngaged[menIndexOf(currentPartner)] = false;
+                        menEngaged[getMenIndex(currentPartner)] = false;
                     }
                 }
             }
         }
-        printCouples();
+        showCouples();
     }
-    // function to check if women prefers new partner over old assigned partner
-    private boolean morePreference(String curPartner, String newPartner, int index) {
+    private boolean anotherPreference(String curPartner, String newPartner, int index) {
         for (int i = 0; i < N; i++) {
             if (womenPref[index][i].equals(newPartner)) {
                 return true;
@@ -64,7 +61,7 @@ public class Matches {
         return false;
     }
     // get men index
-    private int menIndexOf(String str) {
+    private int getMenIndex(String str) {
         for (int i = 0; i < N; i++) {
             if (men[i].equals(str)) {
                 return i;
@@ -73,7 +70,7 @@ public class Matches {
         return -1;
     }
     // get women index
-    private int womenIndexOf(String str) {
+    private int getWomenIndex(String str) {
         for (int i = 0; i < N; i++) {
             if (women[i].equals(str)) {
                 return i;
@@ -82,9 +79,9 @@ public class Matches {
         return -1;
     }
     // print couples
-    public void printCouples() {
+    public void showCouples() {
         for (int i = 0; i < N; i++) {
-            System.out.println(womenPartner[i] +" "+ women[i]);
+            System.out.println(womenPartner[i] +" & "+ women[i]);
         }
     }
 
